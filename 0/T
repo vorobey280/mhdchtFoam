@@ -35,10 +35,10 @@ boundaryField
     lowerWall
     {
         type            externalWallHeatFluxTemperature;
-				mode						flux;
-				kappaMethod			fluidThermo;
-				q								uniform -1e5;
-				value						$internalField;
+		mode			flux;
+		kappaMethod		fluidThermo;
+		q				uniform 100000;
+		value			$internalField;
     }
 
     upperWall

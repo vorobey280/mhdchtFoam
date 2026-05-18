@@ -1,0 +1,192 @@
+/*--------------------------------*- C++ -*----------------------------------*\
+| =========                 |                                                 |
+| \\      /  F ield         | OpenFOAM: The Open Source CFD Toolbox           |
+|  \\    /   O peration     | Version:  v2512                                 |
+|   \\  /    A nd           | Website:  www.openfoam.com                      |
+|    \\/     M anipulation  |                                                 |
+\*---------------------------------------------------------------------------*/
+FoamFile
+{
+    version     2.0;
+    format      ascii;
+    class       dictionary;
+    object      fvSolution;
+}
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
+
+solvers
+{
+    p
+    {
+        solver          PCG;
+        preconditioner  DIC;
+        tolerance       1e-06;
+        relTol          0.05;
+    }
+
+    pFinal
+    {
+        $p;
+        reltol          0;
+    }
+
+    rho
+    {
+        solver          PCG;
+        preconditioner  DIC;
+        tolerance       1e-06;
+        relTol          0.05;
+    }
+
+    rhoFinal
+    {
+        $rho;
+        relTol          0;
+    }
+
+    pB
+    {
+        $p;
+        tolerance       1e-05;
+        relTol          0;
+    }
+
+    pBFinal
+    {
+        $pB;
+        relTol          0;
+    }
+
+    "(U|B)"
+    {
+        solver          smoothSolver;
+        smoother        symGaussSeidel;
+        tolerance       1e-08;
+        relTol          0.1;
+    }
+    
+    UFinal
+    {
+        solver          smoothSolver;
+        smoother        symGaussSeidel;
+        $U;
+        relTol          0;
+    }
+
+    BFinal
+    {
+        solver          smoothSolver;
+        smoother        symGaussSeidel;
+        $B;
+        tolerance       1e-05;
+        relTol          0;
+    }
+
+    h
+    {
+        solver          smoothSolver;
+        smoother        symGaussSeidel;
+        tolerance       1e-08;
+        relTol          0.1;
+    }
+ 
+    hFinal
+    {
+        solver          smoothSolver;
+        smoother        symGaussSeidel;
+        $h;
+        relTol          0;
+    }
+
+    p_rgh
+    {
+        solver          smoothSolver;
+        smoother        symGaussSeidel;
+        tolerance       1e-08;
+        relTol          0.1;
+    }
+ 
+    p_rghFinal
+    {
+        solver          smoothSolver;
+        smoother        symGaussSeidel;
+        $p_rgh;
+        tolerance       1e-05;
+        relTol          0;
+    }
+
+    omega
+    {
+        //solver          smoothSolver;
+        //smoother        symGaussSeidel;
+				solver          PBiCGStab;
+        preconditioner  DILU;
+        tolerance       1e-05;
+        relTol          0.1;
+    }
+ 
+    omegaFinal
+    {
+        solver          smoothSolver;
+        smoother        symGaussSeidel;
+        $omega;
+        tolerance       1e-05;
+        relTol          0;
+    }
+
+    epsilon
+    {
+        solver          smoothSolver;
+        smoother        symGaussSeidel;
+        tolerance       1e-05;
+        relTol          0.1;
+    }
+ 
+    epsilonFinal
+    {
+        solver          smoothSolver;
+        smoother        symGaussSeidel;
+        $epsilon;
+        tolerance       1e-05;
+        relTol          0;
+    }
+
+
+    k
+    {
+        solver          smoothSolver;
+        smoother        symGaussSeidel;
+        tolerance       1e-05;
+        relTol          0.1;
+    }
+ 
+    kFinal
+    {
+        solver          smoothSolver;
+        smoother        symGaussSeidel;
+        $k;
+        tolerance       1e-05;
+        relTol          0;
+    }
+
+}
+
+PIMPLE
+{
+    pRefCell        0;
+    pRefValue       0;
+}
+
+PISO
+{
+    nCorrectors     3;
+    nNonOrthogonalCorrectors 0;
+}
+
+BPISO
+{
+    nCorrectors     3;
+}
+
+
+// ************************************************************************* //

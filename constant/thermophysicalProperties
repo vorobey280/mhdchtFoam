@@ -22,9 +22,9 @@ thermoType
     type            heRhoThermo;
     mixture         pureMixture;
 
-    transport       const;
-    thermo          hConst;
-    equationOfState Boussinesq;
+    transport       polynomial;
+    thermo          hPolynomial;
+    equationOfState icoPolynomial;
     specie          specie;
 
     energy          sensibleEnthalpy;
@@ -38,19 +38,18 @@ mixture
     }
     equationOfState
     {
-        rho0        1200;
-        T0          300;
-        beta        3.6e-4;
+        rhoCoeffs<8>        (1200 0 0 0 0 0 0 0);
     }
     thermodynamics
     {
-        Cp          3470;
+        CpCoeffs<8>  (3225.576 2.086 -0.000952 0 0 0 0 0);
         Hf          0;
+				Sf					0;
     }
     transport
     {
-        mu          0.00185;
-        Pr          9.7;
+        muCoeffs<8>          (0.00185 0 0 0 0 0 0 0);
+        kappaCoeffs<8>          (0.6427 0 0 0 0 0 0 0);
     }
 }
 

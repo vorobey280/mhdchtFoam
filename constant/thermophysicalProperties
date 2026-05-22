@@ -38,7 +38,7 @@ mixture
     }
     equationOfState
     {
-        rhoCoeffs<8>        (1200 0 0 0 0 0 0 0);
+        rhoCoeffs<8>        (1178.89 0.21822 -0.0014404 0 0 0 0 0);
     }
     thermodynamics
     {
@@ -48,7 +48,7 @@ mixture
     }
     transport
     {
-        muCoeffs<8>          (0.00185 0 0 0 0 0 0 0);
+        muCoeffs<8>          (0.003138 2.248e-6 1.105e-9 0 0 0 0 0);
         kappaCoeffs<8>          (0.6427 0 0 0 0 0 0 0);
     }
 }
